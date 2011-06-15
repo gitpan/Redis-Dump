@@ -7,41 +7,53 @@ with 'MooseX::Getopt';
 use Redis 1.904;
 
 # ABSTRACT: Backup and restore your Redis data to and from JSON.
-our $VERSION = '0.005'; # VERSION
+our $VERSION = '0.006'; # VERSION
 
 has _conn => (
-    is => 'rw',
-    isa => 'Redis',
+    is       => 'rw',
+    isa      => 'Redis',
     init_arg => undef,
-    lazy => 1,
-    default => sub { Redis->new( server => shift->server ) }
+    lazy     => 1,
+    default  => sub { Redis->new( server => shift->server ) }
 );
 
 sub _get_keys {
     shift->_conn->keys("*");
 }
 
+sub _get_type_and_filter {
+    my ( $self, $key ) = @_;
+    return if $self->has_filter and not $key =~ $self->filter;
+    my $type = $self->_conn->type($key);
+    return if @{ $self->type } and not grep { /$type/ } @{ $self->type };
+    return $type;
+}
+
+sub _get_value {
+    my ( $self, $key, $type ) = @_;
+    return $self->_conn->get($key) if $type eq 'string';
+    return $self->_conn->lrange( $key, 0, -1 ) if $type eq 'list';
+    return $self->_conn->smembers($key) if $type eq 'set';
+    return $self->_conn->zrange( $key, 0, -1 ) if $type eq 'zset';
+
+    if ( $type eq 'hash' ) {
+        my %hash;
+        foreach my $item ( $self->_conn->hkeys($key) ) {
+            $hash{$item} = $self->_conn->hget( $key, $item );
+        }
+        return {%hash};
+    }
+}
+
 sub _get_values_by_keys {
     my $self = shift;
     my %keys;
-    foreach my $key ($self->_get_keys) {
 
-        next if $self->has_filter and $key !~ $self->filter;
-
-        my $type = $self->_conn->type($key);
-
-        $keys{$key} = $self->_conn->get($key) if $type eq 'string';
-        $keys{$key} = $self->_conn->lrange($key, 0, -1) if $type eq 'list';
-        $keys{$key} = $self->_conn->smembers($key) if $type eq 'set';
-        $keys{$key} = $self->_conn->zrange($key, 0, -1) if $type eq 'zset';
-
-        if ($type eq 'hash') {
-            my %hash;
-            foreach my $item ($self->_conn->hkeys($key)) {
-                $hash{$item} = $self->_conn->hget($key, $item);
-            }
-            $keys{$key} = { %hash } ;
-        }
+    foreach my $key ( $self->_get_keys ) {
+        my $type = $self->_get_type_and_filter($key) or next;
+        my $show_name = $key;
+        $show_name .= " ($type)" if $self->show_type;
+        $keys{$show_name} = $self->_get_value( $key, $type );
     }
     return %keys;
 }
@@ -55,19 +67,36 @@ sub run {
 
 
 has server => (
-    is => 'rw',
-    isa => 'Str',
-    default => '127.0.0.1:6379',
+    is            => 'rw',
+    isa           => 'Str',
+    default       => '127.0.0.1:6379',
     documentation => 'Host:Port of redis server (ex. 127.0.0.1:6379)'
 );
 
 
 has filter => (
-    is => 'rw',
-    isa => 'Str',
-    default => '',
-    predicate => 'has_filter',
+    is            => 'rw',
+    isa           => 'Str',
+    default       => '',
+    predicate     => 'has_filter',
     documentation => 'String to filter keys stored in redis server'
+);
+
+
+has type => (
+    is            => 'rw',
+    isa           => 'ArrayRef[Str]',
+    default       => sub { [] },
+    predicate     => 'has_type',
+    documentation => 'Show just this type of key',
+);
+
+
+has show_type => (
+    is            => 'rw',
+    isa           => 'Bool',
+    default       => 0,
+    documentation => 'If you want to show type with key name.'
 );
 
 1;
@@ -82,7 +111,7 @@ Redis::Dump - Backup and restore your Redis data to and from JSON.
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -126,6 +155,16 @@ Host:Port of redis server, example: 127.0.0.1:6379.
 =head2 filter
 
 String to filter keys stored in redis server.
+
+=head2 type
+
+If you want to get just some types of keys.
+
+It can be: lists, sets, hashs, strings
+
+=head2 show_type
+
+If you want to show type with key name.
 
 =head1 DEVELOPMENT
 
