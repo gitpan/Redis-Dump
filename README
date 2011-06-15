@@ -2,7 +2,7 @@ NAME
     Redis::Dump - Backup and restore your Redis data to and from JSON.
 
 VERSION
-    version 0.006
+    version 0.007
 
 SYNOPSIS
         $ redis-dump --server 127.0.0.1:6379 --filter foo

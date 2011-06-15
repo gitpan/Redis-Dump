@@ -38,7 +38,7 @@ my %WriteMakefileArgs = (
     'MooseX::Getopt' => '0',
     'Redis' => '1.904'
   },
-  'VERSION' => '0.006',
+  'VERSION' => '0.007',
   'test' => {
     'TESTS' => 't/*.t'
   }
