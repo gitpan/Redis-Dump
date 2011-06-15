@@ -7,7 +7,7 @@ with 'MooseX::Getopt';
 use Redis 1.904;
 
 # ABSTRACT: Backup and restore your Redis data to and from JSON.
-our $VERSION = '0.003'; # VERSION
+our $VERSION = '0.004'; # VERSION
 
 has server => (
     is => 'rw',
@@ -42,6 +42,8 @@ sub _get_values_by_keys {
         my $type = $self->conn->type($key);
         $keys{$key} = $self->conn->get($key) if $type eq 'string';
         $keys{$key} = $self->conn->lrange($key, 0, -1) if $type eq 'list';
+        $keys{$key} = $self->conn->smembers($key) if $type eq 'set';
+        $keys{$key} = $self->conn->zrange($key, 0, -1) if $type eq 'zset';
 
         if ($type eq 'hash') {
             my %hash;
@@ -74,7 +76,7 @@ Redis::Dump - Backup and restore your Redis data to and from JSON.
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 DESCRIPTION
 

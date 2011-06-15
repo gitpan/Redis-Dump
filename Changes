@@ -1,8 +1,21 @@
 Revision History for Redis-Dump
 ===============================
 
-0.003
+0.004
 -----
+
+commit 73d030014a16d8abab35e7f4849f250d269bcf7d
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    Support for sorted set.
+
+commit 6438d2104915ce115b3e4c0623d39bdb18666977
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    Support for set stored.
+
+v0.003 2011-06-15
+-----------------
 
 commit 55f14502f99d7681e45e06af710f3a14dcb7267c
 Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>

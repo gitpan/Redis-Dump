@@ -22,4 +22,6 @@ t/release-kwalitee.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/release-unused-vars.t
+t/set.t
 t/tlib/Test/SpawnRedisServer.pm
+t/zset.t
