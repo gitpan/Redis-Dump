@@ -7,7 +7,7 @@ with 'MooseX::Getopt';
 use Redis 1.904;
 
 # ABSTRACT: Backup and restore your Redis data to and from JSON.
-our $VERSION = '0.002'; # VERSION
+our $VERSION = '0.003'; # VERSION
 
 has server => (
     is => 'rw',
@@ -22,6 +22,13 @@ has conn => (
     default => sub { Redis->new( server => shift->server ) }
 );
 
+has filter => (
+    is => 'rw',
+    isa => 'Str',
+    default => '',
+    predicate => 'has_filter'
+);
+
 sub _get_keys {
     shift->conn->keys("*");
 }
@@ -30,6 +37,8 @@ sub _get_values_by_keys {
     my $self = shift;
     my %keys;
     foreach my $key ($self->_get_keys) {
+        next if $self->has_filter and $key !~ $self->filter;
+
         my $type = $self->conn->type($key);
         $keys{$key} = $self->conn->get($key) if $type eq 'string';
         $keys{$key} = $self->conn->lrange($key, 0, -1) if $type eq 'list';
@@ -65,15 +74,27 @@ Redis::Dump - Backup and restore your Redis data to and from JSON.
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 DESCRIPTION
 
 Backup and restore your Redis data to and from JSON.
 
+    $ redis-dump --server 127.0.0.1:6379 --filter foo
+    {
+           "foo" : "1",
+    }
+
 =head2 run
 
-Run app
+You can use as a module.
+
+    use Redis::Dump;
+    use Data::Dumper;
+
+    my $dump = Redis::Dump({ server => '127.0.0.16379', filter => 'foo' });
+
+    print Dumper( \$dump->run );
 
 =head1 AUTHOR
 

@@ -2,13 +2,25 @@ NAME
     Redis::Dump - Backup and restore your Redis data to and from JSON.
 
 VERSION
-    version 0.002
+    version 0.003
 
 DESCRIPTION
     Backup and restore your Redis data to and from JSON.
 
+        $ redis-dump --server 127.0.0.1:6379 --filter foo
+        {
+               "foo" : "1",
+        }
+
   run
-    Run app
+    You can use as a module.
+
+        use Redis::Dump;
+        use Data::Dumper;
+
+        my $dump = Redis::Dump({ server => '127.0.0.16379', filter => 'foo' });
+
+        print Dumper( \$dump->run );
 
 AUTHOR
     Thiago Rondon <thiago@nsms.com.br>
