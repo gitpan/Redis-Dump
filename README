@@ -1,0 +1,21 @@
+NAME
+    Redis::Dump - Backup and restore your Redis data to and from JSON.
+
+VERSION
+    version 0.001
+
+DESCRIPTION
+    Backup and restore your Redis data to and from JSON.
+
+  run
+    Run app
+
+AUTHOR
+    Thiago Rondon <thiago@nsms.com.br>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2011 by Thiago Rondon.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
