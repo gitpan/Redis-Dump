@@ -1,8 +1,16 @@
 Revision History for Redis-Dump
 ===============================
 
-0.004
+0.005
 -----
+
+commit f5e656609be4fa377adf9fb0e714b7797b1315c6
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    POD.
+
+v0.004 2011-06-15
+-----------------
 
 commit 73d030014a16d8abab35e7f4849f250d269bcf7d
 Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
