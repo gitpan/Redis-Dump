@@ -1,6 +1,19 @@
 Revision History for Redis-Dump
 ===============================
 
+0.002
+-----
+
+commit abc3906a27624751ec9f3945e94fce3c1b06420e
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    Use Redis 1.904.
+
+commit 20a83595e67f15f871b4b4ef1fa40c80c316b920
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    Skip Test::SpawnRedisServer in dist.ini.
+
 ===================================
 End of changes in the last 365 days
 ===================================

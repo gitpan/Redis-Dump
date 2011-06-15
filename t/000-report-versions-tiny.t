@@ -58,11 +58,10 @@ eval { $v .= pmver('JSON','any version') };
 eval { $v .= pmver('Moose','any version') };
 eval { $v .= pmver('MooseX::Getopt','any version') };
 eval { $v .= pmver('POSIX','any version') };
-eval { $v .= pmver('Redis','any version') };
+eval { $v .= pmver('Redis','1.904') };
 eval { $v .= pmver('Test::Deep','any version') };
 eval { $v .= pmver('Test::Exception','any version') };
 eval { $v .= pmver('Test::More','0.88') };
-eval { $v .= pmver('Test::SpawnRedisServer','any version') };
 
 
 

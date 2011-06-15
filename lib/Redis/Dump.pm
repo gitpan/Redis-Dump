@@ -4,10 +4,10 @@ package Redis::Dump;
 use Moose;
 with 'MooseX::Getopt';
 
-use Redis;
+use Redis 1.904;
 
 # ABSTRACT: Backup and restore your Redis data to and from JSON.
-our $VERSION = '0.001'; # VERSION
+our $VERSION = '0.002'; # VERSION
 
 has server => (
     is => 'rw',
@@ -65,7 +65,7 @@ Redis::Dump - Backup and restore your Redis data to and from JSON.
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 DESCRIPTION
 

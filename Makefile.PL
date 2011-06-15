@@ -20,8 +20,7 @@ my %WriteMakefileArgs = (
     'POSIX' => '0',
     'Test::Deep' => '0',
     'Test::Exception' => '0',
-    'Test::More' => '0.88',
-    'Test::SpawnRedisServer' => '0'
+    'Test::More' => '0.88'
   },
   'CONFIGURE_REQUIRES' => {
     'ExtUtils::MakeMaker' => '6.30'
@@ -37,9 +36,9 @@ my %WriteMakefileArgs = (
     'JSON' => '0',
     'Moose' => '0',
     'MooseX::Getopt' => '0',
-    'Redis' => '0'
+    'Redis' => '1.904'
   },
-  'VERSION' => '0.001',
+  'VERSION' => '0.002',
   'test' => {
     'TESTS' => 't/*.t'
   }

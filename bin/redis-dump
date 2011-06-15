@@ -6,7 +6,7 @@ use strict;
 use Redis::Dump;
 use JSON;
 
-our $VERSION = '0.001'; # VERSION
+our $VERSION = '0.002'; # VERSION
 
 my $app = Redis::Dump->new_with_options();
 
@@ -22,7 +22,7 @@ Redis::Runner
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 AUTHOR
 
