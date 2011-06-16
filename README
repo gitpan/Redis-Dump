@@ -2,17 +2,19 @@ NAME
     Redis::Dump - Backup and restore your Redis data to and from JSON.
 
 VERSION
-    version 0.007
+    version 0.008
 
 SYNOPSIS
-        $ redis-dump --server 127.0.0.1:6379 --filter foo
-        {
-               "foo" : "1",
-        }
+        use Redis::Dump;
+        use Data::Dumper;
+
+        my $dump = Redis::Dump({ server => '127.0.0.6379', filter => 'foo' });
+
+        print Dumper( \$dump->run );
 
 DESCRIPTION
     It's a simple way to dump data from redis-server in JSON format or any
-    format you want (you can use Redis::Dump class).
+    format you want.
 
 COMMAND LINE API
     This class uses MooseX::Getopt to provide a command line api. The
@@ -23,14 +25,7 @@ METHODS
     Provided by MooseX::Getopt. Parses attributes init args from @ARGV.
 
   run
-    Perfomas the actual dump, and you can use your code as:
-
-        use Redis::Dump;
-        use Data::Dumper;
-
-        my $dump = Redis::Dump({ server => '127.0.0.6379', filter => 'foo' });
-
-        print Dumper( \$dump->run );
+    Perfomas the actual dump.
 
 ATTRIBUTES
   server
