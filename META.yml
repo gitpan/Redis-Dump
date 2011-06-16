@@ -22,11 +22,13 @@ meta-spec:
   version: 1.4
 name: Redis-Dump
 requires:
+  Data::Dumper: 0
   JSON: 0
   Moose: 0
   MooseX::Getopt: 0
+  MooseX::Types::Path::Class: 0
   Redis: 1.904
 resources:
   bugtracker: http://github.com/maluco/Redis-Dump/issues
   repository: git://github.com/maluco/Redis-Dump
-version: 0.010
+version: 0.011

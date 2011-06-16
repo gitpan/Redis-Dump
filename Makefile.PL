@@ -28,17 +28,21 @@ my %WriteMakefileArgs = (
   'DISTNAME' => 'Redis-Dump',
   'EXE_FILES' => [
     'bin/redis-dump',
-    'bin/redis-dump'
+    'bin/redis-restore',
+    'bin/redis-dump',
+    'bin/redis-restore'
   ],
   'LICENSE' => 'perl',
   'NAME' => 'Redis::Dump',
   'PREREQ_PM' => {
+    'Data::Dumper' => '0',
     'JSON' => '0',
     'Moose' => '0',
     'MooseX::Getopt' => '0',
+    'MooseX::Types::Path::Class' => '0',
     'Redis' => '1.904'
   },
-  'VERSION' => '0.010',
+  'VERSION' => '0.011',
   'test' => {
     'TESTS' => 't/*.t'
   }

@@ -2,7 +2,7 @@ NAME
     Redis::Dump - It's a simple way to dump data from redis-server
 
 VERSION
-    version 0.010
+    version 0.011
 
 SYNOPSIS
         use Redis::Dump;
@@ -48,6 +48,9 @@ DEVELOPMENT
     pull request, or a beer.
 
     <http://www.github.com/maluco/Redis-Dump>
+
+SEE ALSO
+    Redis::Dump::Restore, App::Redis::Dump, App::Redis::Dump::Restore
 
 SUPPORT
     You can find documentation for this module with the perldoc command.

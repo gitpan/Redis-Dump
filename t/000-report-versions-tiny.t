@@ -48,6 +48,7 @@ sub pmver {
     return sprintf('%-45s => %-10s%-15s%s', $module, $pmver, $wanted, "\n");
 }
 
+eval { $v .= pmver('Data::Dumper','any version') };
 eval { $v .= pmver('English','any version') };
 eval { $v .= pmver('Exporter','any version') };
 eval { $v .= pmver('ExtUtils::MakeMaker','6.30') };
@@ -57,6 +58,7 @@ eval { $v .= pmver('IO::String','any version') };
 eval { $v .= pmver('JSON','any version') };
 eval { $v .= pmver('Moose','any version') };
 eval { $v .= pmver('MooseX::Getopt','any version') };
+eval { $v .= pmver('MooseX::Types::Path::Class','any version') };
 eval { $v .= pmver('POSIX','any version') };
 eval { $v .= pmver('Redis','1.904') };
 eval { $v .= pmver('Test::Deep','any version') };
