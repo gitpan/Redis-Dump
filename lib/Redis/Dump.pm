@@ -6,8 +6,8 @@ with 'MooseX::Getopt';
 
 use Redis 1.904;
 
-# ABSTRACT: Backup and restore your Redis data to and from JSON.
-our $VERSION = '0.008'; # VERSION
+# ABSTRACT: It's a simple way to dump data from redis-server
+our $VERSION = '0.009'; # VERSION
 
 has _conn => (
     is       => 'ro',
@@ -117,11 +117,11 @@ has show_type => (
 
 =head1 NAME
 
-Redis::Dump - Backup and restore your Redis data to and from JSON.
+Redis::Dump - It's a simple way to dump data from redis-server
 
 =head1 VERSION
 
-version 0.008
+version 0.009
 
 =head1 SYNOPSIS
 

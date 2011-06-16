@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Backup and restore your Redis data to and from JSON.',
+  'ABSTRACT' => 'It\'s a simple way to dump data from redis-server',
   'AUTHOR' => 'Thiago Rondon <thiago@nsms.com.br>',
   'BUILD_REQUIRES' => {
     'English' => '0',
@@ -38,7 +38,7 @@ my %WriteMakefileArgs = (
     'MooseX::Getopt' => '0',
     'Redis' => '1.904'
   },
-  'VERSION' => '0.008',
+  'VERSION' => '0.009',
   'test' => {
     'TESTS' => 't/*.t'
   }

@@ -1,5 +1,5 @@
 {
-   "abstract" : "Backup and restore your Redis data to and from JSON.",
+   "abstract" : "It's a simple way to dump data from redis-server",
    "author" : [
       "Thiago Rondon <thiago@nsms.com.br>"
    ],
@@ -52,6 +52,6 @@
          "web" : "http://github.com/maluco/Redis-Dump"
       }
    },
-   "version" : "0.008"
+   "version" : "0.009"
 }
 
