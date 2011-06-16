@@ -2,7 +2,7 @@ NAME
     Redis::Dump - It's a simple way to dump data from redis-server
 
 VERSION
-    version 0.009
+    version 0.010
 
 SYNOPSIS
         use Redis::Dump;
@@ -37,7 +37,7 @@ ATTRIBUTES
   type
     If you want to get just some types of keys.
 
-    It can be: lists, sets, hashs, strings
+    It can be: lists, sets, hashs, strings, zsets
 
   show_type
     If you want to show type with key name.

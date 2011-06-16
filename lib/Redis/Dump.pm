@@ -7,7 +7,7 @@ with 'MooseX::Getopt';
 use Redis 1.904;
 
 # ABSTRACT: It's a simple way to dump data from redis-server
-our $VERSION = '0.009'; # VERSION
+our $VERSION = '0.010'; # VERSION
 
 has _conn => (
     is       => 'ro',
@@ -25,7 +25,7 @@ sub _get_type_and_filter {
     my ( $self, $key ) = @_;
     return if $self->has_filter and not $key =~ $self->filter;
     my $type = $self->_conn->type($key);
-    return if @{ $self->type } and not grep { /$type/ } @{ $self->type };
+    return if @{ $self->type } and not grep { /^$type/ } @{ $self->type };
     return $type;
 }
 
@@ -121,7 +121,7 @@ Redis::Dump - It's a simple way to dump data from redis-server
 
 =head1 VERSION
 
-version 0.009
+version 0.010
 
 =head1 SYNOPSIS
 
@@ -165,7 +165,7 @@ String to filter keys stored in redis server.
 
 If you want to get just some types of keys.
 
-It can be: lists, sets, hashs, strings
+It can be: lists, sets, hashs, strings, zsets
 
 =head2 show_type
 

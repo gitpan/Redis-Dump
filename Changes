@@ -1,8 +1,16 @@
 Revision History for Redis-Dump
 ===============================
 
-0.009
+0.010
 -----
+
+commit aafb1f4bfe224f02d3b5ecc4410beeb34788d792
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    Bugfix in filter option with zsets and sets.
+
+v0.009 2011-06-16
+-----------------
 
 commit 3c7070f5a95b62f6e0d9ffbc2f25832d4ec9c2e6
 Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
