@@ -6,7 +6,8 @@ use strict;
 use Redis::Dump;
 use JSON;
 
-our $VERSION = '0.011'; # VERSION
+# ABSTRACT: It's a simple way to dump and backup data from redis-server.
+our $VERSION = '0.012'; # VERSION
 
 my $app = Redis::Dump->new_with_options();
 
@@ -20,11 +21,11 @@ print to_json( { $app->run }, { ascii => 1, pretty => 1 } );
 
 =head1 NAME
 
-App::Redis::Dump
+App::Redis::Dump - It's a simple way to dump and backup data from redis-server.
 
 =head1 VERSION
 
-version 0.011
+version 0.012
 
 =head1 SYNOPSIS
 

@@ -29,4 +29,3 @@ t/restore.t
 t/set.t
 t/tlib/Test/SpawnRedisServer.pm
 t/zset.t
-z

@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's a simple way to dump data from redis-server",
+   "abstract" : "It's a simple way to dump and backup data from redis-server",
    "author" : [
       "Thiago Rondon <thiago@nsms.com.br>"
    ],
@@ -21,7 +21,6 @@
       },
       "runtime" : {
          "requires" : {
-            "Data::Dumper" : 0,
             "JSON" : 0,
             "Moose" : 0,
             "MooseX::Getopt" : 0,
@@ -54,6 +53,6 @@
          "web" : "http://github.com/maluco/Redis-Dump"
       }
    },
-   "version" : "0.011"
+   "version" : "0.012"
 }
 

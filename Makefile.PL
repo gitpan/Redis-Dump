@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'It\'s a simple way to dump data from redis-server',
+  'ABSTRACT' => 'It\'s a simple way to dump and backup data from redis-server',
   'AUTHOR' => 'Thiago Rondon <thiago@nsms.com.br>',
   'BUILD_REQUIRES' => {
     'English' => '0',
@@ -35,14 +35,13 @@ my %WriteMakefileArgs = (
   'LICENSE' => 'perl',
   'NAME' => 'Redis::Dump',
   'PREREQ_PM' => {
-    'Data::Dumper' => '0',
     'JSON' => '0',
     'Moose' => '0',
     'MooseX::Getopt' => '0',
     'MooseX::Types::Path::Class' => '0',
     'Redis' => '1.904'
   },
-  'VERSION' => '0.011',
+  'VERSION' => '0.012',
   'test' => {
     'TESTS' => 't/*.t'
   }

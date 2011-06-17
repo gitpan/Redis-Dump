@@ -4,10 +4,9 @@ package App::Redis::Dump::Restore;
 
 use strict;
 use Redis::Dump::Restore;
-use JSON;
-use Data::Dumper;
 
-our $VERSION = '0.011'; # VERSION
+# ABSTRACT: It's a simple way to restore data to redis-server based on redis-dump.
+our $VERSION = '0.012'; # VERSION
 
 print "WARNING! Note that this software should be considered experimental !\n";
 my $app = Redis::Dump::Restore->new_with_options;
@@ -21,11 +20,11 @@ $app->run;
 
 =head1 NAME
 
-App::Redis::Dump::Restore
+App::Redis::Dump::Restore - It's a simple way to restore data to redis-server based on redis-dump.
 
 =head1 VERSION
 
-version 0.011
+version 0.012
 
 =head1 SYNOPSIS
 
