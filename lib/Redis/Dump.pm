@@ -7,7 +7,7 @@ with 'MooseX::Getopt';
 use Redis 1.904;
 
 # ABSTRACT: It's a simple way to dump and backup data from redis-server
-our $VERSION = '0.012'; # VERSION
+our $VERSION = '0.013'; # VERSION
 
 has _conn => (
     is       => 'ro',
@@ -62,8 +62,8 @@ sub _get_values_by_keys {
     foreach my $key ( $self->_get_keys ) {
         my $type = $self->_get_type_and_filter($key) or next;
         my $show_name = $key;
-        $show_name .= " ($type)" if $self->show_type;
-        $keys{$show_name} = $self->_get_value( $key, $type );
+        $show_name .= " ($type)" if $self->showtype;
+        $keys{$show_name} = $self->hidevalues ? '' : $self->_get_value( $key, $type );
     }
     return %keys;
 }
@@ -102,11 +102,19 @@ has type => (
 );
 
 
-has show_type => (
+has showtype => (
     is            => 'ro',
     isa           => 'Bool',
     default       => 0,
     documentation => 'If you want to show type with key name.'
+);
+
+
+has hidevalues => (
+    is            => 'ro',
+    isa           => 'Bool',
+    default       => 0,
+    documentation => 'Hide values of keys'
 );
 
 1;
@@ -121,7 +129,7 @@ Redis::Dump - It's a simple way to dump and backup data from redis-server
 
 =head1 VERSION
 
-version 0.012
+version 0.013
 
 =head1 SYNOPSIS
 
@@ -167,9 +175,13 @@ If you want to get just some types of keys.
 
 It can be: lists, sets, hashs, strings, zsets
 
-=head2 show_type
+=head2 show-type
 
 If you want to show type with key name.
+
+=head2 hidevalues
+
+Hide value of keys.
 
 =head1 DEVELOPMENT
 

@@ -3,7 +3,7 @@ NAME
     redis-server
 
 VERSION
-    version 0.012
+    version 0.013
 
 SYNOPSIS
         use Redis::Dump;
@@ -40,8 +40,11 @@ ATTRIBUTES
 
     It can be: lists, sets, hashs, strings, zsets
 
-  show_type
+  show-type
     If you want to show type with key name.
+
+  hidevalues
+    Hide value of keys.
 
 DEVELOPMENT
     Redis::Dump is a open source project for everyone to participate. The

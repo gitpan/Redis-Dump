@@ -9,7 +9,7 @@ with 'MooseX::Getopt';
 use Redis 1.904;
 
 # ABSTRACT: It's a simple way to restore data to redis-server based on redis-dump.
-our $VERSION = '0.012'; # VERSION
+our $VERSION = '0.013'; # VERSION
 
 has _conn => (
     is       => 'ro',
@@ -119,7 +119,7 @@ Redis::Dump::Restore - It's a simple way to restore data to redis-server based o
 
 =head1 VERSION
 
-version 0.012
+version 0.013
 
 =head1 SYNOPSIS
 
