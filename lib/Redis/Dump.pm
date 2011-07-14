@@ -7,7 +7,7 @@ with 'MooseX::Getopt';
 use Redis 1.904;
 
 # ABSTRACT: It's a simple way to dump and backup data from redis-server
-our $VERSION = '0.013'; # VERSION
+our $VERSION = '0.014'; # VERSION
 
 has _conn => (
     is       => 'ro',
@@ -18,7 +18,10 @@ has _conn => (
 );
 
 sub _get_keys {
-    shift->_conn->keys("*");
+    my $self   = shift;
+    my $filter = $self->filter;
+    return $self->_conn->keys("*$filter*") if $filter;
+    return $self->_conn->keys("*");
 }
 
 sub _get_type_and_filter {
@@ -129,7 +132,7 @@ Redis::Dump - It's a simple way to dump and backup data from redis-server
 
 =head1 VERSION
 
-version 0.013
+version 0.014
 
 =head1 SYNOPSIS
 

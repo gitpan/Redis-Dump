@@ -30,4 +30,4 @@ requires:
 resources:
   bugtracker: http://github.com/maluco/Redis-Dump/issues
   repository: git://github.com/maluco/Redis-Dump
-version: 0.013
+version: 0.014

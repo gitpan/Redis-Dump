@@ -1,8 +1,16 @@
 Revision History for Redis-Dump
 ===============================
 
-0.013
+0.014
 -----
+
+commit 6d1e968f73238f94d25def3eea0ebfe041d9d35b
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    Make get_keys better with filter.
+
+v0.013 2011-06-20
+-----------------
 
 commit 0e09c322533ebc30b1a935a8fb064c2f996b1fcc
 Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
