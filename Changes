@@ -1,8 +1,31 @@
 Revision History for Redis-Dump
 ===============================
 
-0.014
+0.015
 -----
+
+commit 264c8105deb46e3aebab01faa9341f666195cb87
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    eol.
+
+commit 33da9bfceb0079db6ca2e25b6e794912796d4e5c
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    Prepare for 0.15 release.
+
+commit d6367b8dc302c29c617e05563ad6e179651aed41
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    redis-config is a new cmd for get/restore config from a redis server.
+
+commit 562b5f8d9cf683cfaf8577cc454131110cd70f75
+Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>
+
+    Add initial support to dump config of redis server too.
+
+v0.014 2011-07-14
+-----------------
 
 commit 6d1e968f73238f94d25def3eea0ebfe041d9d35b
 Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>

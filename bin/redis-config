@@ -1,20 +1,17 @@
 #!/usr/bin/perl
 
-package App::Redis::Dump;
+package App::Redis::Dump::Config;
 
 use strict;
-use Redis::Dump;
+use Redis::Dump::Config;
 use JSON;
 
-# ABSTRACT: It's a simple way to dump and backup data from redis-server.
+# ABSTRACT: It's a simple way to dump and backup config from redis-server.
 our $VERSION = '0.015'; # VERSION
 
-my $app = Redis::Dump->new_with_options();
+my $app = Redis::Dump::Config->new_with_options();
 
 print to_json( { $app->run } , { ascii => 1, pretty => 1 } );
-
-#print to_json( { $app->run_config }, { ascii => 1, pretty => 1 } ) if $app->config;
-
 
 1;
 
@@ -24,7 +21,7 @@ print to_json( { $app->run } , { ascii => 1, pretty => 1 } );
 
 =head1 NAME
 
-App::Redis::Dump - It's a simple way to dump and backup data from redis-server.
+App::Redis::Dump::Config - It's a simple way to dump and backup config from redis-server.
 
 =head1 VERSION
 
@@ -32,26 +29,37 @@ version 0.015
 
 =head1 SYNOPSIS
 
-    redis-dump --server 127.0.0.1:6379 --filter foo
+    redis-config --server 127.0.0.1:6379
     {
-        "foo" : "1",
-    }
+	   "requirepass" : "",
+	   "dbfilename" : "dump.rdb",
+	   "slave-serve-stale-data" : "yes",
+	   "dir" : "/Users/thiago",
+	   "list-max-ziplist-entries" : "512",
+	   "save" : "3600 1 300 100 60 10000",
+	   "hash-max-zipmap-value" : "64",
+	   "timeout" : "300",
+	   "maxmemory-samples" : "3",
+	   "set-max-intset-entries" : "512",
+	   "list-max-ziplist-value" : "64",
+	   "no-appendfsync-on-rewrite" : "no",
+	   "appendfsync" : "everysec",
+	   "maxmemory-policy" : "volatile-lru",
+	   "maxmemory" : "",
+	   "appendonly" : "no",
+	   "masterauth" : "",
+	   "hash-max-zipmap-entries" : "512"
 
-    redis-dump --type list --filter my --show_type
-    {
-      "mylist (list)" : [
-            "{\"uuid\":\"F3D4BA06-9793-11E0-AAB9-D0A1E5EB3B8E\",\"from_number\":\"0000\",\"customer\":\"21\"\"}",
-            ]
-    }
+	}
 
-Run C<redis-dump -h> for more options.
+Run C<redis-config -h> for more options.
 
 =head1 DESCRIPTION
 
-redis-dump is a script to dump your redis server, requires zero
+redis-config is a script to dump your config redis server, requires zero
 configuration, and return a JSON with data.
 
-See L<Redis::Dump> for more information.
+See L<Redis::Dump::Config> for more information.
 
 =head1 SEE ALSO
 

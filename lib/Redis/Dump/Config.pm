@@ -1,14 +1,14 @@
 
-package Redis::Dump::Restore;
+package Redis::Dump::Config;
 
 use Moose;
 use MooseX::Types::Path::Class;
-use JSON;
 with 'MooseX::Getopt';
 
+use JSON;
 use Redis 1.904;
 
-# ABSTRACT: It's a simple way to restore data to redis-server based on redis-dump.
+# ABSTRACT: It's a simple way to dump and backup config from redis-server
 our $VERSION = '0.015'; # VERSION
 
 has _conn => (
@@ -19,68 +19,37 @@ has _conn => (
     default  => sub { Redis->new( server => shift->server ) }
 );
 
-sub _set_string {
-    my ( $self, $name, $value ) = @_;
-    $self->_conn->set( $name => $value );
-}
-
-sub _set_array {
-    my ( $self, $name, $value ) = @_;
-
-    foreach my $item ( @{$value} ) {
-        my $type = ref($item);
-        $self->_conn->rpush( $name, $item ) if !$type;    # list
-
-        if ( $type eq 'HASH' ) {
-            my %zsets = %{$item};
-            foreach my $range ( keys %zsets ) {
-                $self->_conn->zadd( $name, $range, $zsets{$range} );
-            }
-        }
-
-    }
-
-}
-
-sub _set_hash {
-    my ( $self, $name, $value ) = @_;
-
-    my %sets = %{$value};
-    foreach my $item ( keys %sets ) {
-        my $type = ref($item);
-        $self->sadd( $name, $item, $sets{$item} ) if !$type;    # smembers
-
-        if ( $type eq 'HASH' ) {
-            my %hashs = %{$item};
-            foreach my $key ( keys %hashs ) {
-                $self->_conn->hset( $name, $key, $hashs{$key} );
-            }
-        }
-    }
-}
-
-sub _set_values_by_keys {
+sub _get_config {
     my $self = shift;
-
-    my %keys = %{ from_json( $self->file->slurp ) };
-    $self->_conn->flushall if $self->flushall;
-
-    foreach my $key ( keys %keys ) {
-        my $type = ref( $keys{$key} );
-        $self->_set_string( $key, $keys{$key} ) if !$type;
-        $self->_set_array( $key, $keys{$key} ) if $type eq 'ARRAY';
-        $self->_set_hash( $key, $keys{$key} ) if $type eq 'HASH';
+    my %cf;
+    my $filter = $self->filter;
+    my @configs = $self->_conn->config( 'get', $filter ? "*$filter*" : '*' );
+    for ( my $loop = 0; $loop < scalar(@configs) / 2; $loop++ ) {
+        my $name = $configs[ $loop * 2 ];
+        my $value = $configs[ ( $loop * 2 ) + 1 ] || '';
+        $cf{$name} = $value;
     }
-    return 1;
+
+    return %cf;
+}
+
+sub _restore {
+    my $self = shift;
+    my %keys = %{ from_json( $self->restore->slurp ) };
+    foreach my $key ( keys %keys ) {
+        my $value = $keys{$key} || "";
+        warn "config set $key $value";
+        $self->_conn->config( 'set', $key, $value );
+    }
 }
 
 
 sub run {
     my $self = shift;
 
-    my $fh = $self->file->openr() or confess "Can't read file: $!";
+    $self->_restore if $self->has_restore;
 
-    return $self->_set_values_by_keys;
+    return $self->_get_config;
 }
 
 
@@ -92,19 +61,21 @@ has server => (
 );
 
 
-has flushall => (
+has filter => (
     is            => 'ro',
-    isa           => 'Bool',
-    default       => 0,
-    documentation => 'Remove all keys from all databases'
+    isa           => 'Str',
+    default       => '',
+    predicate     => 'has_filter',
+    documentation => 'String to filter keys stored in redis server'
 );
 
 
-has file => (
+has restore => (
     is            => 'ro',
     isa           => 'Path::Class::File',
     coerce        => 1,
-    documentation => 'File with restore'
+    predicate     => 'has_restore',
+    documentation => 'Restore a config redis server to the server',
 );
 
 1;
@@ -115,7 +86,7 @@ has file => (
 
 =head1 NAME
 
-Redis::Dump::Restore - It's a simple way to restore data to redis-server based on redis-dump.
+Redis::Dump::Config - It's a simple way to dump and backup config from redis-server
 
 =head1 VERSION
 
@@ -123,13 +94,17 @@ version 0.015
 
 =head1 SYNOPSIS
 
-    use Redis::Dump::Restore;
+    use Redis::Dump::Config;
+    use Data::Dumper;
 
-    my $restore = Redis::Dump::Restore->new({ server => '127.0.0.6379', file => 'foo.txt');
+    my $dump = Redis::Dump::Config->new({ server => '127.0.0.6379', filter => 'foo' });
+
+    print Dumper( \$dump->run );
 
 =head1 DESCRIPTION
 
-It's a simple way to restore data to redis-server based on redis-dump (JSON).
+It's a simple way to dump config from redis-server in JSON format or any format
+you want.
 
 =head1 COMMAND LINE API
 
@@ -143,7 +118,7 @@ Provided by L<MooseX::Getopt>. Parses attributes init args from @ARGV.
 
 =head2 run
 
-Perfomas the actual restore.
+Perfomas the actual dump.
 
 =head1 ATTRIBUTES
 
@@ -151,13 +126,13 @@ Perfomas the actual restore.
 
 Host:Port of redis server, example: 127.0.0.1:6379.
 
-=head2 flushall
+=head2 filter
 
-Remove all keys from all databases
+String to filter keys stored in redis server.
 
-=head2 file
+=head2 restore
 
-File with dump
+Restore a config redis server to the server.
 
 =head1 DEVELOPMENT
 
@@ -169,7 +144,7 @@ L<http://www.github.com/maluco/Redis-Dump>
 
 =head1 SEE ALSO
 
-L<Redis::Dump>, L<App::Redis::Dump>, L<App::Redis::Dump::Restore>
+L<Redis::Dump::Restore>, L<App::Redis::Dump>, L<App::Redis::Dump::Restore>
 
 =head1 SUPPORT
 

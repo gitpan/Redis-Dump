@@ -6,7 +6,7 @@ use strict;
 use Redis::Dump::Restore;
 
 # ABSTRACT: It's a simple way to restore data to redis-server based on redis-dump.
-our $VERSION = '0.014'; # VERSION
+our $VERSION = '0.015'; # VERSION
 
 print "WARNING! Note that this software should be considered experimental !\n";
 my $app = Redis::Dump::Restore->new_with_options;
@@ -24,7 +24,7 @@ App::Redis::Dump::Restore - It's a simple way to restore data to redis-server ba
 
 =head1 VERSION
 
-version 0.014
+version 0.015
 
 =head1 SYNOPSIS
 

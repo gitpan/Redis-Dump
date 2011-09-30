@@ -9,41 +9,46 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'It\'s a simple way to dump and backup data from redis-server',
-  'AUTHOR' => 'Thiago Rondon <thiago@nsms.com.br>',
-  'BUILD_REQUIRES' => {
-    'English' => '0',
-    'Exporter' => '0',
-    'File::Find' => '0',
-    'File::Temp' => '0',
-    'IO::String' => '0',
-    'POSIX' => '0',
-    'Test::Deep' => '0',
-    'Test::Exception' => '0',
-    'Test::More' => '0.88'
+  "ABSTRACT" => "It's a simple way to dump and backup data from redis-server",
+  "AUTHOR" => "Thiago Rondon <thiago\@nsms.com.br>",
+  "BUILD_REQUIRES" => {
+    "English" => 0,
+    "Exporter" => 0,
+    "File::Find" => 0,
+    "File::Temp" => 0,
+    "IO::String" => 0,
+    "POSIX" => 0,
+    "Test::Deep" => 0,
+    "Test::Exception" => 0,
+    "Test::More" => "0.88",
+    "base" => 0,
+    "warnings" => 0
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.30'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'Redis-Dump',
-  'EXE_FILES' => [
-    'bin/redis-dump',
-    'bin/redis-restore',
-    'bin/redis-dump',
-    'bin/redis-restore'
+  "DISTNAME" => "Redis-Dump",
+  "EXE_FILES" => [
+    "bin/redis-config",
+    "bin/redis-dump",
+    "bin/redis-restore",
+    "bin/redis-config",
+    "bin/redis-dump",
+    "bin/redis-restore"
   ],
-  'LICENSE' => 'perl',
-  'NAME' => 'Redis::Dump',
-  'PREREQ_PM' => {
-    'JSON' => '0',
-    'Moose' => '0',
-    'MooseX::Getopt' => '0',
-    'MooseX::Types::Path::Class' => '0',
-    'Redis' => '1.904'
+  "LICENSE" => "perl",
+  "NAME" => "Redis::Dump",
+  "PREREQ_PM" => {
+    "JSON" => 0,
+    "Moose" => 0,
+    "MooseX::Getopt" => 0,
+    "MooseX::Types::Path::Class" => 0,
+    "Redis" => "1.904",
+    "strict" => 0
   },
-  'VERSION' => '0.014',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.015",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

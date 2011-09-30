@@ -3,7 +3,7 @@ NAME
     redis-server
 
 VERSION
-    version 0.014
+    version 0.015
 
 SYNOPSIS
         use Redis::Dump;
@@ -40,7 +40,7 @@ ATTRIBUTES
 
     It can be: lists, sets, hashs, strings, zsets
 
-  show-type
+  showtype
     If you want to show type with key name.
 
   hidevalues

@@ -7,7 +7,7 @@ with 'MooseX::Getopt';
 use Redis 1.904;
 
 # ABSTRACT: It's a simple way to dump and backup data from redis-server
-our $VERSION = '0.014'; # VERSION
+our $VERSION = '0.015'; # VERSION
 
 has _conn => (
     is       => 'ro',
@@ -72,9 +72,9 @@ sub _get_values_by_keys {
 }
 
 
+
 sub run {
     my $self = shift;
-
     return $self->_get_values_by_keys;
 }
 
@@ -132,7 +132,7 @@ Redis::Dump - It's a simple way to dump and backup data from redis-server
 
 =head1 VERSION
 
-version 0.014
+version 0.015
 
 =head1 SYNOPSIS
 
@@ -178,7 +178,7 @@ If you want to get just some types of keys.
 
 It can be: lists, sets, hashs, strings, zsets
 
-=head2 show-type
+=head2 showtype
 
 If you want to show type with key name.
 
