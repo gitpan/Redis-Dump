@@ -16,6 +16,7 @@ lib/Redis/Dump/Restore.pm
 t/00-compile.t
 t/000-report-versions-tiny.t
 t/author-critic.t
+t/database.t
 t/filter.t
 t/hash.t
 t/keys.t
@@ -23,6 +24,7 @@ t/list.t
 t/release-distmeta.t
 t/release-eol.t
 t/release-has-version.t
+t/release-kwalitee.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/release-unused-vars.t
@@ -30,3 +32,4 @@ t/restore.t
 t/set.t
 t/tlib/Test/SpawnRedisServer.pm
 t/zset.t
+z

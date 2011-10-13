@@ -3,7 +3,7 @@ NAME
     redis-server
 
 VERSION
-    version 0.015
+    version 0.016
 
 SYNOPSIS
         use Redis::Dump;
@@ -32,6 +32,9 @@ ATTRIBUTES
   server
     Host:Port of redis server, example: 127.0.0.1:6379.
 
+  database
+    If you want to select another database than default which is 0.
+
   filter
     String to filter keys stored in redis server.
 
@@ -55,6 +58,9 @@ DEVELOPMENT
 
 SEE ALSO
     Redis::Dump::Restore, App::Redis::Dump, App::Redis::Dump::Restore
+
+CREDITS
+    *   Rémi Paulmier
 
 SUPPORT
     You can find documentation for this module with the perldoc command.

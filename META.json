@@ -4,7 +4,7 @@
       "Thiago Rondon <thiago@nsms.com.br>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300002, CPAN::Meta::Converter version 2.110440",
+   "generated_by" : "Dist::Zilla version 4.200012, CPAN::Meta::Converter version 2.110440",
    "license" : [
       "perl_5"
    ],
@@ -25,8 +25,7 @@
             "Moose" : 0,
             "MooseX::Getopt" : 0,
             "MooseX::Types::Path::Class" : 0,
-            "Redis" : "1.904",
-            "strict" : 0
+            "Redis" : "1.904"
          }
       },
       "test" : {
@@ -39,9 +38,7 @@
             "POSIX" : 0,
             "Test::Deep" : 0,
             "Test::Exception" : 0,
-            "Test::More" : "0.88",
-            "base" : 0,
-            "warnings" : 0
+            "Test::More" : "0.88"
          }
       }
    },
@@ -56,6 +53,6 @@
          "web" : "http://github.com/maluco/Redis-Dump"
       }
    },
-   "version" : "0.015"
+   "version" : "0.016"
 }
 

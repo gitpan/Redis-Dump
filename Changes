@@ -1,8 +1,23 @@
 Revision History for Redis-Dump
 ===============================
 
-0.015
+0.016
 -----
+
+commit 248dc44fdff1f89fd8db283c2693cc4d673053e0
+Author: Remi Paulmier <remi.paulmier@gmail.com>
+
+    added test for database selection
+
+commit 33d4f667983fe42e2092d96829a5ee13214f86f6
+Author: Remi Paulmier <remi.paulmier@gmail.com>
+
+    added database choice in Restore.pm
+
+commit 5f73606e325db856bf096d770e829946b6f13ca8
+Author: Remi Paulmier <remi.paulmier@gmail.com>
+
+    added database choice in Dump.pm
 
 commit 264c8105deb46e3aebab01faa9341f666195cb87
 Author: Thiago Berlitz Rondon <thiago.rondon@gmail.com>

@@ -7,14 +7,19 @@ with 'MooseX::Getopt';
 use Redis 1.904;
 
 # ABSTRACT: It's a simple way to dump and backup data from redis-server
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.016'; # VERSION
 
 has _conn => (
     is       => 'ro',
     isa      => 'Redis',
     init_arg => undef,
     lazy     => 1,
-    default  => sub { Redis->new( server => shift->server ) }
+    default  => sub {
+        my $tconf = shift;
+        my $tconn = Redis->new( server => $tconf->server );
+        $tconn->select( $tconf->database);
+        $tconn
+    }
 );
 
 sub _get_keys {
@@ -87,6 +92,14 @@ has server => (
 );
 
 
+has database => (
+    is            => 'ro',
+    isa           => 'Int',
+    default       => 0,
+    documentation => 'Database used in a multi-database setup'
+);
+
+
 has filter => (
     is            => 'ro',
     isa           => 'Str',
@@ -132,7 +145,7 @@ Redis::Dump - It's a simple way to dump and backup data from redis-server
 
 =head1 VERSION
 
-version 0.015
+version 0.016
 
 =head1 SYNOPSIS
 
@@ -168,6 +181,10 @@ Perfomas the actual dump.
 
 Host:Port of redis server, example: 127.0.0.1:6379.
 
+=head2 database
+
+If you want to select another database than default which is 0.
+
 =head2 filter
 
 String to filter keys stored in redis server.
@@ -197,6 +214,14 @@ L<http://www.github.com/maluco/Redis-Dump>
 =head1 SEE ALSO
 
 L<Redis::Dump::Restore>, L<App::Redis::Dump>, L<App::Redis::Dump::Restore>
+
+=head1 CREDITS
+
+=over 4
+
+=item * Rémi Paulmier
+
+=back
 
 =head1 SUPPORT
 

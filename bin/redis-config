@@ -7,7 +7,7 @@ use Redis::Dump::Config;
 use JSON;
 
 # ABSTRACT: It's a simple way to dump and backup config from redis-server.
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.016'; # VERSION
 
 my $app = Redis::Dump::Config->new_with_options();
 
@@ -25,7 +25,7 @@ App::Redis::Dump::Config - It's a simple way to dump and backup config from redi
 
 =head1 VERSION
 
-version 0.015
+version 0.016
 
 =head1 SYNOPSIS
 

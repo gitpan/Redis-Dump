@@ -9,7 +9,7 @@ use JSON;
 use Redis 1.904;
 
 # ABSTRACT: It's a simple way to dump and backup config from redis-server
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.016'; # VERSION
 
 has _conn => (
     is       => 'ro',
@@ -90,7 +90,7 @@ Redis::Dump::Config - It's a simple way to dump and backup config from redis-ser
 
 =head1 VERSION
 
-version 0.015
+version 0.016
 
 =head1 SYNOPSIS
 

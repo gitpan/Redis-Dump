@@ -9,14 +9,19 @@ with 'MooseX::Getopt';
 use Redis 1.904;
 
 # ABSTRACT: It's a simple way to restore data to redis-server based on redis-dump.
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.016'; # VERSION
 
 has _conn => (
     is       => 'ro',
     isa      => 'Redis',
     init_arg => undef,
     lazy     => 1,
-    default  => sub { Redis->new( server => shift->server ) }
+    default  => sub {
+        my $tconf = shift;
+        my $tconn = Redis->new( server => $tconf->server );
+        $tconn->select( $tconf->database);
+        $tconn
+    }
 );
 
 sub _set_string {
@@ -92,6 +97,14 @@ has server => (
 );
 
 
+has database => (
+    is            => 'ro',
+    isa           => 'Int',
+    default       => 0,
+    documentation => 'Database used in a multi-database setup'
+);
+
+
 has flushall => (
     is            => 'ro',
     isa           => 'Bool',
@@ -119,7 +132,7 @@ Redis::Dump::Restore - It's a simple way to restore data to redis-server based o
 
 =head1 VERSION
 
-version 0.015
+version 0.016
 
 =head1 SYNOPSIS
 
@@ -150,6 +163,10 @@ Perfomas the actual restore.
 =head2 server
 
 Host:Port of redis server, example: 127.0.0.1:6379.
+
+=head2 database
+
+If you want to select another database than default which is 0.
 
 =head2 flushall
 
